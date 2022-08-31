@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vayber.smbms.mapper.BillMapper">
+    <select id="getBillList" resultType="com.vayber.smbms.bean.Bill">
+        SELECT b.*,p.proName FROM smbms_bill b,smbms_provider p
+        <where>
+            b.providerId = p.id
+            <if test='productName != null and productName !=  ""'>
+                and b.productName like concat("%",#{productName},"%")
+            </if>
+            <if test="providerId != null">
+                and b.providerId = #{providerId}
+            </if>
+            <if test="isPayment != null">
+                and b.isPayment = #{isPayment}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="selectPage" resultType="com.vayber.smbms.bean.Bill">
+        SELECT b.*,p.proName FROM smbms_bill b,smbms_provider p
+        <where>
+            b.providerId = p.id
+            <if test='productName != null and productName !=  ""'>
+                and b.productName like concat("%",#{productName},"%")
+            </if>
+            <if test="providerId != null">
+                and b.providerId = #{providerId}
+            </if>
+            <if test="isPayment != null">
+                and b.isPayment = #{isPayment}
+            </if>
+            ORDER BY b.id LIMIT #{myPage.currentPageNo} , #{myPage.pageSize}
+        </where>
+    </select>
+
+
+</mapper>
