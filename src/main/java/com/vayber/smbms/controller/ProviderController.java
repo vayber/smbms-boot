@@ -42,7 +42,7 @@ public class ProviderController {
             wrapper.like("proCode",proCode);
         }
         if (!proName.equals("")){
-            wrapper.eq("userRole",proName);
+            wrapper.eq("proName",proName);
         }
 
         Page<Provider> providerPage = providerService.page(page,wrapper);
@@ -60,7 +60,7 @@ public class ProviderController {
             wrapper.like("proCode",proCode);
         }
         if (!proName.equals("")){
-            wrapper.eq("userRole",proName);
+            wrapper.eq("proName",proName);
         }
         return providerService.count(wrapper);
     }
